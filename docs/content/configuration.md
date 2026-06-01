@@ -125,6 +125,28 @@ UPage 现在将“页面生成能力”和“图片理解能力”解耦处理�
 前往 [ZhiPu](https://bigmodel.cn/usercenter/proj-mgmt/apikeys) 获取 API 密钥。
 :::
 
+### 智谱 AI Coding Plan（ZhiPuCodingPlan）
+
+智谱 AI Coding Plan 是专为 AI 编码打造的订阅套餐，支持 GLM-5.1、GLM-5-Turbo、GLM-4.7、GLM-4.5-Air 等模型。
+
+| 环境变量 | 描述 | 默认值 | 必填 |
+| --- | --- | --- | --- |
+| `LLM_PROVIDER` | ZhiPuCodingPlan 提供商名称 | ZhiPuCodingPlan | 是 |
+| <span className="api-key-highlight">`PROVIDER_API_KEY`</span> | ZhiPu Coding Plan API 密钥 | - | 是（如果使用 ZhiPuCodingPlan） |
+| `LLM_DEFAULT_MODEL` | 默认使用的模型（推荐 `glm-4.7`） | - | 是 |
+| `LLM_MINOR_MODEL` | 辅助模型（推荐 `glm-4.5-air`） | - | 是 |
+
+:::info
+前往 [智谱 AI 开放平台](https://bigmodel.cn/usercenter/proj-mgmt/apikeys) 获取 API 密钥。
+
+Coding Plan 套餐会自动使用专属的 API 端点 `https://open.bigmodel.cn/api/coding/paas/v4`，无需手动配置 `PROVIDER_BASE_URL`。
+
+推荐配置：
+- `LLM_DEFAULT_MODEL=glm-4.7` — 日常页面生成，性价比最优
+- `LLM_MINOR_MODEL=glm-4.5-air` — 辅助任务（摘要、上下文选择），速度快
+- 复杂任务可使用 `glm-5.1` 或 `glm-5-turbo`（额度消耗更快）
+:::
+
 ### Amazon Bedrock
 
 | 环境变量 | 描述 | 默认值 | 必填 |
