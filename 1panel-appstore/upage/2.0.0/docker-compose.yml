@@ -1,0 +1,30 @@
+services:
+  upage:
+    image: ghcr.io/corps-cy/upage:latest
+    container_name: ${CONTAINER_NAME}
+    restart: always
+    networks:
+      - 1panel-network
+    ports:
+      - ${PANEL_APP_PORT_HTTP}:3000
+    environment:
+      OPERATING_ENV: production
+      NODE_ENV: production
+      LOGTO_ENABLE: "false"
+      USAGE_LOG_FILE: "true"
+      LOG_LEVEL: info
+      LLM_PROVIDER: ${LLM_PROVIDER}
+      PROVIDER_API_KEY: ${PROVIDER_API_KEY}
+      PROVIDER_BASE_URL: ${PROVIDER_BASE_URL}
+      LLM_DEFAULT_MODEL: ${LLM_DEFAULT_MODEL}
+      LLM_MINOR_MODEL: ${LLM_MINOR_MODEL}
+      MAX_UPLOAD_SIZE_MB: ${MAX_UPLOAD_SIZE_MB}
+    volumes:
+      - ./data/data:/app/data
+      - ./data/logs:/app/logs
+      - ./data/storage:/app/storage
+    labels:
+      createdBy: "Apps"
+networks:
+  1panel-network:
+    external: true

@@ -1,0 +1,115 @@
+additionalProperties:
+  formFields:
+    - label: 端口配置
+      list: []
+      required: true
+      type: number
+      envKey: PANEL_APP_PORT_HTTP
+      key: panel-app-port-http
+      labelEn: HTTP Port
+      default: 3000
+      edit: true
+
+    - label: LLM 提供商
+      list:
+        - label: 智谱 Coding Plan（推荐）
+          value: ZhiPuCodingPlan
+        - label: 智谱 (BigModel)
+          value: ZhiPu
+        - label: OpenAI
+          value: OpenAI
+        - label: DeepSeek
+          value: Deepseek
+        - label: 通义千问
+          value: Qwen
+        - label: 豆包
+          value: DouBao
+        - label: Kimi
+          value: Kimi
+        - label: Anthropic
+          value: Anthropic
+        - label: Google
+          value: Google
+        - label: Ollama (本地)
+          value: Ollama
+        - label: OpenRouter
+          value: OpenRouter
+        - label: Groq
+          value: Groq
+      required: true
+      type: select
+      envKey: LLM_PROVIDER
+      key: llm-provider
+      labelEn: LLM Provider
+      default: ZhiPuCodingPlan
+      edit: true
+
+    - label: API Key
+      list: []
+      required: true
+      type: password
+      envKey: PROVIDER_API_KEY
+      key: provider-api-key
+      labelEn: API Key
+      default: ""
+      edit: true
+
+    - label: API Base URL（可选）
+      list: []
+      required: false
+      type: text
+      envKey: PROVIDER_BASE_URL
+      key: provider-base-url
+      labelEn: API Base URL (Optional)
+      default: ""
+      edit: true
+
+    - label: 默认模型
+      list:
+        - label: glm-5.1 (智谱 Coding Plan)
+          value: glm-5.1
+        - label: glm-4.7 (智谱 Coding Plan)
+          value: glm-4.7
+        - label: glm-5-turbo (智谱 Coding Plan)
+          value: glm-5-turbo
+        - label: glm-4.5-air (智谱 Coding Plan 省额度)
+          value: glm-4.5-air
+        - label: deepseek-chat
+          value: deepseek-chat
+        - label: gpt-4o
+          value: gpt-4o
+        - label: qwen-max
+          value: qwen-max
+      required: true
+      type: select
+      envKey: LLM_DEFAULT_MODEL
+      key: llm-default-model
+      labelEn: Default Model
+      default: glm-5.1
+      edit: true
+
+    - label: 辅助模型
+      list:
+        - label: glm-4.5-air (推荐省额度)
+          value: glm-4.5-air
+        - label: glm-5-turbo
+          value: glm-5-turbo
+        - label: deepseek-chat
+          value: deepseek-chat
+      required: false
+      type: select
+      envKey: LLM_MINOR_MODEL
+      key: llm-minor-model
+      labelEn: Minor Model
+      default: glm-4.5-air
+      edit: true
+
+    - label: 最大上传大小 (MB)
+      list: []
+      required: false
+      type: number
+      envKey: MAX_UPLOAD_SIZE_MB
+      key: max-upload-size
+      labelEn: Max Upload Size (MB)
+      default: 5
+      edit: true
