@@ -192,7 +192,7 @@ handle_db_migration() {
         local push_output
         push_output=$(create_temp_file)
 
-        if ! pnpm prisma db push --accept-data-loss --skip-generate > "$push_output" 2>&1; then
+        if ! pnpm prisma db push --accept-data-loss  > "$push_output" 2>&1; then
           log_error "使用 db push 也失败了:"
           cat "$push_output"
           return 1
@@ -211,7 +211,7 @@ handle_db_migration() {
     local push_output
     push_output=$(create_temp_file)
 
-    if ! pnpm prisma db push --accept-data-loss --skip-generate > "$push_output" 2>&1; then
+    if ! pnpm prisma db push --accept-data-loss  > "$push_output" 2>&1; then
       log_error "使用 db push 也失败了:"
       cat "$push_output"
       return 1
