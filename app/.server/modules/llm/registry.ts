@@ -19,6 +19,7 @@ import PerplexityProvider from './providers/perplexity';
 import QwenProvider from './providers/qwen';
 import TogetherProvider from './providers/together';
 import XAIProvider from './providers/xai';
+import ZhiPuCodingPlanProvider from './providers/zhipu-coding-plan';
 import ZhiPuProvider from './providers/zhipu';
 
 export {
@@ -29,6 +30,7 @@ export {
   ErnieProvider,
   KimiProvider,
   QwenProvider,
+  ZhiPuCodingPlanProvider,
   ZhiPuProvider,
   GoogleProvider,
   GroqProvider,
