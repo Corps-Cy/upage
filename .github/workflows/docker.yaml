@@ -33,7 +33,7 @@ jobs:
       - name: Docker Buildx and Push
         uses: ./.github/actions/docker-buildx-push
         with:
-          image-name: ${{ github.event_name == 'release' && 'upage' || 'upage-dev' }}
+          image-name: upage
           ghcr-token: ${{ secrets.GITHUB_TOKEN }}
           dockerhub-user: ${{ secrets.DOCKER_USERNAME }}
           dockerhub-token: ${{ secrets.DOCKER_TOKEN }}
