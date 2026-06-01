@@ -18,7 +18,7 @@ services:
       PROVIDER_BASE_URL: ${PROVIDER_BASE_URL}
       LLM_DEFAULT_MODEL: ${LLM_DEFAULT_MODEL}
       LLM_MINOR_MODEL: ${LLM_MINOR_MODEL}
-      MAX_UPLOAD_SIZE_MB: ${MAX_UPLOAD_SIZE_MB}
+      MAX_UPLOAD_SIZE_MB: ${MAX_UPLOAD_SIZE_MB:-5}
     volumes:
       - ./data/data:/app/data
       - ./data/logs:/app/logs
