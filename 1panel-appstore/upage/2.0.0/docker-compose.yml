@@ -1,6 +1,6 @@
 services:
   upage:
-    image: ghcr.io/corps-cy/upage:latest
+    image: ghcr.io/corps-cy/upage-dev:main
     container_name: ${CONTAINER_NAME}
     restart: always
     networks:
