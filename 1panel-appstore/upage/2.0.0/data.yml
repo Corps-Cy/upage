@@ -1,20 +1,37 @@
 additionalProperties:
   formFields:
-    - label: 端口配置
-      list: []
+    - type: number
+      labelZh: HTTP 端口
+      labelEn: Port
+      label:
+        en: Port
+        ja: ポート
+        ko: 포트
+        zh-hant: HTTP連接埠
+        zh: HTTP 端口
       required: true
-      type: number
+      rule: paramPort
       envKey: PANEL_APP_PORT_HTTP
-      key: panel-app-port-http
-      labelEn: HTTP Port
       default: 3000
       edit: true
 
-    - label: LLM 提供商
-      list:
+    - type: select
+      labelZh: LLM 提供商
+      labelEn: LLM provider
+      label:
+        en: LLM provider
+        ja: LLMプロバイダー
+        ko: LLM 공급자
+        zh-hant: LLM 提供商
+        zh: LLM 提供商
+      required: true
+      envKey: LLM_PROVIDER
+      default: ZhiPuCodingPlan
+      edit: true
+      values:
         - label: 智谱 Coding Plan（推荐）
           value: ZhiPuCodingPlan
-        - label: 智谱 (BigModel)
+        - label: 智谱 AI
           value: ZhiPu
         - label: OpenAI
           value: OpenAI
@@ -24,92 +41,78 @@ additionalProperties:
           value: Qwen
         - label: 豆包
           value: DouBao
-        - label: Kimi
+        - label: 月之暗面
           value: Kimi
-        - label: Anthropic
+        - label: Anthropic Claude
           value: Anthropic
         - label: Google
           value: Google
-        - label: Ollama (本地)
+        - label: Ollama
           value: Ollama
         - label: OpenRouter
           value: OpenRouter
         - label: Groq
           value: Groq
-      required: true
-      type: select
-      envKey: LLM_PROVIDER
-      key: llm-provider
-      labelEn: LLM Provider
-      default: ZhiPuCodingPlan
-      edit: true
 
-    - label: API Key
-      list: []
-      required: true
-      type: password
-      envKey: PROVIDER_API_KEY
-      key: provider-api-key
+    - type: password
+      labelZh: API 密钥
       labelEn: API Key
-      default: ""
-      edit: true
-
-    - label: API Base URL（可选）
-      list: []
-      required: false
-      type: text
-      envKey: PROVIDER_BASE_URL
-      key: provider-base-url
-      labelEn: API Base URL (Optional)
-      default: ""
-      edit: true
-
-    - label: 默认模型
-      list:
-        - label: glm-5.1 (智谱 Coding Plan)
-          value: glm-5.1
-        - label: glm-4.7 (智谱 Coding Plan)
-          value: glm-4.7
-        - label: glm-5-turbo (智谱 Coding Plan)
-          value: glm-5-turbo
-        - label: glm-4.5-air (智谱 Coding Plan 省额度)
-          value: glm-4.5-air
-        - label: deepseek-chat
-          value: deepseek-chat
-        - label: gpt-4o
-          value: gpt-4o
-        - label: qwen-max
-          value: qwen-max
+      label:
+        en: API Key
+        ja: APIキー
+        ko: API 키
+        zh-hant: API 密鑰
+        zh: API 密钥
       required: true
-      type: select
+      envKey: PROVIDER_API_KEY
+      default: ""
+      edit: true
+
+    - type: text
+      labelZh: API 地址
+      labelEn: API URL
+      label:
+        en: API URL
+        ja: API URL
+        ko: API URL
+        zh-hant: API URL
+        zh: API 地址
+      description:
+        en: "Note: Fill in only when using the OpenAI LLM provider."
+        ja: "注：OpenAI LLMプロバイダーを使用する場合のみ記入してください。"
+        ko: "참고: OpenAI LLM 공급자를 사용하는 경우에만 작성하십시오."
+        zh-hant: "注意：僅在使用 OpenAI LLM 提供商時填寫。"
+        zh: "注意：仅在使用 OpenAI/Ollama/LMStudio 提供商时填写。"
+      required: false
+      rule: paramHttp
+      envKey: PROVIDER_BASE_URL
+      default: ""
+      edit: true
+
+    - type: text
+      labelZh: 页面默认模型
+      labelEn: Default page model
+      label:
+        en: Default page model
+        ja: デフォルトのページモデル
+        ko: 기본 페이지 모델
+        zh-hant: 页面默认模型
+        zh: 页面默认模型
+      required: true
       envKey: LLM_DEFAULT_MODEL
-      key: llm-default-model
-      labelEn: Default Model
-      default: glm-5.1
+      default: "glm-5.1"
       edit: true
 
-    - label: 辅助模型
-      list:
-        - label: glm-4.5-air (推荐省额度)
-          value: glm-4.5-air
-        - label: glm-5-turbo
-          value: glm-5-turbo
-        - label: deepseek-chat
-          value: deepseek-chat
+    - type: text
+      labelZh: 辅助任务模型
+      labelEn: Auxiliary task model
+      label:
+        en: Auxiliary task model
+        ja: 補助タスクモデル
+        ko: 보조 작업 모델
+        zh-hant: 辅助任务模型
+        zh: 辅助任务模型
       required: false
-      type: select
       envKey: LLM_MINOR_MODEL
-      key: llm-minor-model
-      labelEn: Minor Model
-      default: glm-4.5-air
-      edit: true
-
-    - label: 最大上传大小 (MB)
-      list: []
-      required: false
-      type: number
-      envKey: MAX_UPLOAD_SIZE_MB
-      key: max-upload-size
-      labelEn: Max Upload Size (MB)
-      default: 5
+      default: "glm-4.5-air"
       edit: true

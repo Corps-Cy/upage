@@ -1,0 +1,48 @@
+name: Package 1Panel AppStore
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '1panel-appstore/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Package appstore files
+        run: |
+          cd 1panel-appstore/upage/2.0.0
+          tar -czf ../../upage-2.0.0.tar.gz .
+          mv ../../upage-2.0.0.tar.gz ../../upage-2.0.0.tar.gz
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: upage-appstore-package
+          path: upage-2.0.0.tar.gz
+
+      - name: Create or update release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v2.0.0
+          name: UPage v2.0.0 (ZhiPu Coding Plan)
+          body: |
+            UPage v2.0.0 - 智谱 Coding Plan 增强版
+
+            ## 新功能
+            - 支持智谱 Coding Plan 提供商 (glm-5.1, glm-4.7, glm-5-turbo, glm-4.5-air)
+            - 1Panel 应用商店支持
+
+            ## 1Panel 安装方法
+            将 `upage` 目录放到 `/opt/1panel/resource/apps/local/` 后同步本地应用即可。
+          files: |
+            upage-2.0.0.tar.gz
