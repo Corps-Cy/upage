@@ -18,25 +18,25 @@ export default class ZhiPuCodingPlanProvider extends BaseProvider {
       name: 'glm-5.1',
       label: 'GLM-5.1 (Coding Plan)',
       provider: this.name,
-      maxTokenAllowed: 128000,
+      maxTokenAllowed: 16384,
     },
     {
       name: 'glm-5-turbo',
       label: 'GLM-5-Turbo (Coding Plan)',
       provider: this.name,
-      maxTokenAllowed: 128000,
+      maxTokenAllowed: 16384,
     },
     {
       name: 'glm-4.7',
       label: 'GLM-4.7 (Coding Plan)',
       provider: this.name,
-      maxTokenAllowed: 128000,
+      maxTokenAllowed: 16384,
     },
     {
       name: 'glm-4.5-air',
       label: 'GLM-4.5-Air (Coding Plan)',
       provider: this.name,
-      maxTokenAllowed: 128000,
+      maxTokenAllowed: 16384,
     },
   ];
 
@@ -62,7 +62,7 @@ export default class ZhiPuCodingPlanProvider extends BaseProvider {
       name: m.id,
       label: `${m.id} (Coding Plan) - context ${m.context_length ? Math.floor(m.context_length / 1000) + 'k' : 'N/A'}`,
       provider: this.name,
-      maxTokenAllowed: m.context_length || 128000,
+      maxTokenAllowed: m.context_length || 16384,
     }));
   }
 
@@ -79,7 +79,6 @@ export default class ZhiPuCodingPlanProvider extends BaseProvider {
       name: this.name,
       baseURL: baseUrl || ZHIPU_CODING_PLAN_BASE_URL,
       apiKey,
-      includeUsage: true,
     });
 
     return openai(model);
