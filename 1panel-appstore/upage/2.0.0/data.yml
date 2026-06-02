@@ -1,118 +1,305 @@
 additionalProperties:
   formFields:
-    - type: number
-      labelZh: HTTP 端口
+    - default: 3000
+      edit: true
+      envKey: PANEL_APP_PORT_HTTP
       labelEn: Port
+      labelZh: HTTP 端口
       label:
         en: Port
         ja: ポート
         ko: 포트
-        zh-hant: HTTP連接埠
+        zh-Hant: HTTP連接埠
         zh: HTTP 端口
       required: true
       rule: paramPort
-      envKey: PANEL_APP_PORT_HTTP
-      default: 3000
-      edit: true
-
-    - type: select
-      labelZh: LLM 提供商
+      type: number
+    - default: OpenAI
+      envKey: LLM_PROVIDER
       labelEn: LLM provider
+      labelZh: LLM 提供商
       label:
         en: LLM provider
         ja: LLMプロバイダー
         ko: LLM 공급자
-        zh-hant: LLM 提供商
+        zh-Hant: LLM 提供商
         zh: LLM 提供商
       required: true
-      envKey: LLM_PROVIDER
-      default: ZhiPuCodingPlan
-      edit: true
+      type: select
       values:
-        - label: 智谱 Coding Plan（推荐）
-          value: ZhiPuCodingPlan
-        - label: 智谱 AI
-          value: ZhiPu
         - label: OpenAI
           value: OpenAI
         - label: DeepSeek
-          value: Deepseek
-        - label: 通义千问
-          value: Qwen
-        - label: 豆包
+          value: DeepSeek
+        - label: 豆包 (DouBao)
           value: DouBao
-        - label: 月之暗面
+        - label: 文心一言 (Ernie)
+          value: Ernie
+        - label: 月之暗面 (Kimi)
           value: Kimi
+        - label: 通义千问 (Qwen)
+          value: Qwen
+        - label: 智谱 AI (ZhiPu)
+          value: ZhiPu
+        - label: Amazon Bedrock
+          value: AmazonBedrock
         - label: Anthropic Claude
           value: Anthropic
+        - label: Cohere
+          value: Cohere
+        - label: Github
+          value: Github
         - label: Google
           value: Google
+        - label: Groq
+          value: Groq
+        - label: HuggingFace
+          value: HuggingFace
+        - label: Hyperbolic
+          value: Hyperbolic
+        - label: LMStudio
+          value: LMStudio
+        - label: Mistral
+          value: Mistral
         - label: Ollama
           value: Ollama
         - label: OpenRouter
           value: OpenRouter
-        - label: Groq
-          value: Groq
-
-    - type: password
-      labelZh: API 密钥
+        - label: Perplexity
+          value: Perplexity
+        - label: Together
+          value: Together
+        - label: xAI
+          value: xAI
+    - default: ""
+      edit: true
+      envKey: PROVIDER_API_KEY
       labelEn: API Key
+      labelZh: API 密钥
       label:
         en: API Key
         ja: APIキー
         ko: API 키
-        zh-hant: API 密鑰
+        zh-Hant: API 密鑰
         zh: API 密钥
       required: true
-      envKey: PROVIDER_API_KEY
-      default: ""
+      type: password
+    - default: ""
       edit: true
-
-    - type: text
-      labelZh: API 地址
+      envKey: PROVIDER_BASE_URL
       labelEn: API URL
+      labelZh: API 地址
       label:
         en: API URL
         ja: API URL
         ko: API URL
-        zh-hant: API URL
+        zh-Hant: API URL
         zh: API 地址
       description:
-        en: "Note: Fill in only when using the OpenAI LLM provider."
-        ja: "注：OpenAI LLMプロバイダーを使用する場合のみ記入してください。"
-        ko: "참고: OpenAI LLM 공급자를 사용하는 경우에만 작성하십시오."
-        zh-hant: "注意：僅在使用 OpenAI LLM 提供商時填寫。"
-        zh: "注意：仅在使用 OpenAI/Ollama/LMStudio 提供商时填写。"
+        en: "Note: Fill in only when using a provider that requires a custom base URL (e.g. OpenAI, Ollama, LMStudio)."
+        ja: "注：カスタムベースURLが必要なプロバイダー（OpenAI、Ollama、LMStudioなど）を使用する場合のみ記入してください。"
+        ko: "참고: 사용자 정의 기본 URL이 필요한 제공자(OpenAI, Ollama, LMStudio 등)를 사용하는 경우에만 작성하십시오."
+        zh-Hant: "注意：僅在使用需要自定義 API 地址的提供商時填寫（如 OpenAI、Ollama、LMStudio）。"
+        zh: "注意：仅在使用需要自定义 API 地址的提供商时填写（如 OpenAI、Ollama、LMStudio）。"
       required: false
       rule: paramHttp
-      envKey: PROVIDER_BASE_URL
-      default: ""
+      type: text
+    - default: ""
       edit: true
-
-    - type: text
-      labelZh: 页面默认模型
+      envKey: LLM_DEFAULT_MODEL
       labelEn: Default page model
+      labelZh: 页面默认模型
       label:
         en: Default page model
         ja: デフォルトのページモデル
         ko: 기본 페이지 모델
-        zh-hant: 页面默认模型
+        zh-Hant: 页面默认模型
         zh: 页面默认模型
       required: true
-      envKey: LLM_DEFAULT_MODEL
-      default: "glm-5.1"
+      type: text
+    - default: ""
       edit: true
-
-    - type: text
-      labelZh: 辅助任务模型
+      envKey: LLM_MINOR_MODEL
       labelEn: Auxiliary task model
+      labelZh: 辅助任务模型
       label:
         en: Auxiliary task model
         ja: 補助タスクモデル
         ko: 보조 작업 모델
-        zh-hant: 辅助任务模型
+        zh-Hant: 辅助任务模型
         zh: 辅助任务模型
-      required: false
-      envKey: LLM_MINOR_MODEL
-      default: "glm-4.5-air"
+      required: true
+      type: text
+    - default: ""
       edit: true
+      envKey: LLM_VISION_PROVIDER
+      labelEn: Vision model provider
+      labelZh: 视觉模型提供商
+      label:
+        en: Vision model provider
+        ja: ビジョンモデルプロバイダー
+        ko: 비전 모델 공급자
+        zh-Hant: 視覺模型提供商
+        zh: 视觉模型提供商
+      description:
+        en: "Optional. Configure when the primary model does not support multimodal capabilities."
+        ja: "オプション。主モデルがマルチモーダル機能をサポートしていない場合に設定します。"
+        ko: "선택 사항. 기본 모델이 다중 모달 기능을 지원하지 않을 때 구성하세요."
+        zh-Hant: "可選。當主模型不支援多模態功能時配置。"
+        zh: "可选。当主模型不支持多模态功能时配置。"
+      required: false
+      type: select
+      values:
+        - label: OpenAI
+          value: OpenAI
+        - label: DeepSeek
+          value: DeepSeek
+        - label: 豆包 (DouBao)
+          value: DouBao
+        - label: 文心一言 (Ernie)
+          value: Ernie
+        - label: 月之暗面 (Kimi)
+          value: Kimi
+        - label: 通义千问 (Qwen)
+          value: Qwen
+        - label: 智谱 AI (ZhiPu)
+          value: ZhiPu
+        - label: Amazon Bedrock
+          value: AmazonBedrock
+        - label: Anthropic Claude
+          value: Anthropic
+        - label: Cohere
+          value: Cohere
+        - label: Github
+          value: Github
+        - label: Google
+          value: Google
+        - label: Groq
+          value: Groq
+        - label: HuggingFace
+          value: HuggingFace
+        - label: Hyperbolic
+          value: Hyperbolic
+        - label: LMStudio
+          value: LMStudio
+        - label: Mistral
+          value: Mistral
+        - label: Ollama
+          value: Ollama
+        - label: OpenRouter
+          value: OpenRouter
+        - label: Perplexity
+          value: Perplexity
+        - label: Together
+          value: Together
+        - label: xAI
+          value: xAI
+    - default: ""
+      edit: true
+      envKey: LLM_VISION_MODEL
+      labelEn: Vision model
+      labelZh: 视觉模型
+      label:
+        en: Vision model
+        ja: ビジョンモデル
+        ko: 비전 모델
+        zh-Hant: 視覺模型
+        zh: 视觉模型
+      description:
+        en: "Optional. Vision model for processing images when the primary model lacks multimodal support."
+        ja: "オプション。主モデルがマルチモーダルをサポートしていない場合に画像を処理するビジョンモデル。"
+        ko: "선택 사항. 기본 모델이 다중 모달을 지원하지 않을 때 이미지를 처리하는 비전 모델."
+        zh-Hant: "可選。當主模型不支援多模態時用於處理圖像的視覺模型。"
+        zh: "可选。当主模型不支持多模态时用于处理图像的视觉模型。"
+      required: false
+      type: text
+    - default: ""
+      edit: true
+      envKey: VISION_PROVIDER_BASE_URL
+      labelEn: Vision API URL
+      labelZh: 视觉 API 地址
+      label:
+        en: Vision API URL
+        ja: ビジョン API URL
+        ko: 비전 API URL
+        zh-Hant: 視覺 API 位址
+        zh: 视觉 API 地址
+      description:
+        en: "Optional. Base URL for the vision model provider."
+        ja: "オプション。ビジョンモデルプロバイダーのベースURL。"
+        ko: "선택 사항. 비전 모델 공급자의 기본 URL."
+        zh-Hant: "可選。視覺模型提供商的基礎 URL。"
+        zh: "可选。视觉模型提供商的基础 URL。"
+      required: false
+      rule: paramHttp
+      type: text
+    - default: ""
+      edit: true
+      envKey: VISION_PROVIDER_API_KEY
+      labelEn: Vision API Key
+      labelZh: 视觉 API 密钥
+      label:
+        en: Vision API Key
+        ja: ビジョン API キー
+        ko: 비전 API 키
+        zh-Hant: 視覺 API 密鑰
+        zh: 视觉 API 密钥
+      description:
+        en: "Optional. API Key for the vision model provider."
+        ja: "オプション。ビジョンモデルプロバイダーの API キー。"
+        ko: "선택 사항. 비전 모델 공급자의 API 키."
+        zh-Hant: "可選。視覺模型提供商的 API 密鑰。"
+        zh: "可选。视觉模型提供商的 API 密钥。"
+      required: false
+      type: password
+    - default: ""
+      edit: true
+      envKey: SERPER_API_KEY
+      labelEn: Serper API Key
+      labelZh: Serper API 密钥
+      label:
+        en: Serper API Key
+        ja: Serper API キー
+        ko: Serper API 키
+        zh-Hant: Serper API 密鑰
+        zh: Serper API 密钥
+      description:
+        en: "Optional. Get your key at https://serper.dev/ for AI search capabilities."
+        ja: "オプション。AI 検索機能のために https://serper.dev/ でキーを取得してください。"
+        ko: "선택 사항. AI 검색 기능을 위해 https://serper.dev/에서 키를 받으세요."
+        zh-Hant: "可選。在 https://serper.dev/ 獲取密鑰以使用 AI 搜尋功能。"
+        zh: "可选。在 https://serper.dev/ 获取密钥以使用 AI 搜索功能。"
+      required: false
+      type: password
+    - default: ""
+      edit: true
+      envKey: WEATHER_API_KEY
+      labelEn: Weather API Key
+      labelZh: 天气 API 密钥
+      label:
+        en: Weather API Key
+        ja: 天気 API キー
+        ko: 날씨 API 키
+        zh-Hant: 天氣 API 密鑰
+        zh: 天气 API 密钥
+      description:
+        en: "Optional. Get your key at https://www.weatherapi.com/my/ for weather tools."
+        ja: "オプション。天気ツールのために https://www.weatherapi.com/my/ でキーを取得してください。"
+        ko: "선택 사항. 날씨 도구를 위해 https://www.weatherapi.com/my/에서 키를 받으세요."
+        zh-Hant: "可選。在 https://www.weatherapi.com/my/ 獲取密鑰以使用天氣工具。"
+        zh: "可选。在 https://www.weatherapi.com/my/ 获取密钥以使用天气工具。"
+      required: false
+      type: password
+    - default: 5
+      edit: true
+      envKey: MAX_UPLOAD_SIZE_MB
+      labelEn: Max upload size (MB)
+      labelZh: 最大上传大小 (MB)
+      label:
+        en: Max upload size (MB)
+        ja: 最大アップロードサイズ (MB)
+        ko: 최대 업로드 크기 (MB)
+        zh-Hant: 最大上傳大小 (MB)
+        zh: 最大上传大小 (MB)
+      required: false
+      type: number

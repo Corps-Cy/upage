@@ -41,13 +41,14 @@ export default class AnthropicProvider extends BaseProvider {
   ];
 
   async getDynamicModels(settings: IProviderSetting): Promise<ModelInfo[]> {
-    const { apiKey } = this.getProviderBaseUrlAndKey(settings);
+    const { baseUrl: fetchBaseUrl, apiKey } = this.getProviderBaseUrlAndKey(settings);
+    const baseUrl = fetchBaseUrl || 'https://api.anthropic.com/v1';
 
     if (!apiKey) {
       throw `Missing Api Key configuration for ${this.name} provider`;
     }
 
-    const response = await fetch(`https://api.anthropic.com/v1/models`, {
+    const response = await fetch(`${baseUrl}/models`, {
       headers: {
         'x-api-key': `${apiKey}`,
         'anthropic-version': '2023-06-01',
@@ -70,8 +71,9 @@ export default class AnthropicProvider extends BaseProvider {
   getModelInstance: (options: { model: string; providerSettings?: Record<string, IProviderSetting> }) => LanguageModel =
     (options) => {
       const { providerSettings, model } = options;
-      const { apiKey } = this.getProviderBaseUrlAndKey(providerSettings);
+      const { baseUrl, apiKey } = this.getProviderBaseUrlAndKey(providerSettings);
       const anthropic = createAnthropic({
+        baseURL: baseUrl,
         apiKey,
       });
 

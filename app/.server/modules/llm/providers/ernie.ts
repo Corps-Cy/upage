@@ -39,7 +39,7 @@ export default class ErnieProvider extends BaseProvider {
   getModelInstance(options: { model: string; providerSettings?: Record<string, IProviderSetting> }): LanguageModel {
     const { model, providerSettings } = options;
 
-    const { apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
+    const { baseUrl, apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
 
     if (!apiKey) {
       throw `Missing Api Key configuration for ${this.name} provider`;
@@ -47,7 +47,7 @@ export default class ErnieProvider extends BaseProvider {
 
     const provider = createOpenAICompatible({
       name: this.name,
-      baseURL: 'https://qianfan.baidubce.com/v2',
+      baseURL: baseUrl || 'https://qianfan.baidubce.com/v2',
       apiKey,
       includeUsage: true,
     });

@@ -1,21 +1,21 @@
 name: UPage
 tags:
   - AI
-title: 基于大模型的可视化网页构建平台（智谱增强版）
-description: 基于大模型的可视化网页构建平台，支持智谱 Coding Plan，Lovable 开源替代
+title: 基于大模型的可视化网页构建平台
+description: 基于大模型的可视化网页构建平台，Lovable 开源替代
 additionalProperties:
   key: upage
   name: UPage
   tags:
     - AI
-  shortDescZh: 基于大模型的可视化网页构建平台，支持智谱 Coding Plan
-  shortDescEn: An LLM-driven visual web builder with ZhiPu Coding Plan support
+  shortDescZh: 基于大模型的可视化网页构建平台
+  shortDescEn: An LLM-driven visual web builder — the open-source alternative to Lovable
   description:
-    en: An LLM-driven visual web builder with ZhiPu Coding Plan support — the open-source alternative to Lovable
-    zh: 基于大模型的可视化网页构建平台，支持智谱 Coding Plan，Lovable 开源替代
-    zh-hant: 基於大模型的可視化網頁構建平台，支持智譜 Coding Plan
-    ja: LLM駆動のビジュアルWebビルダー（ZhiPu Coding Plan対応）
-    ko: LLM 기반 비주얼 웹 빌더 — ZhiPu Coding Plan 지원
+    en: An LLM-driven visual web builder — the open-source alternative to Lovable
+    zh: 基于大模型的可视化网页构建平台，Lovable 开源替代
+    zh-hant: 基於大模型的可視化網頁構建平台
+    ja: LLM駆動のビジュアルWebビルダー
+    ko: LLM 기반 비주얼 웹 빌더
   type: website
   crossVersionUpdate: true
   limit: 0

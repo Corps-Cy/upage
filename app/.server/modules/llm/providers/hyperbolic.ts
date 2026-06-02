@@ -70,14 +70,14 @@ export default class HyperbolicProvider extends BaseProvider {
   getModelInstance(options: { model: string; providerSettings?: Record<string, IProviderSetting> }): LanguageModel {
     const { model, providerSettings } = options;
 
-    const { apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
+    const { baseUrl, apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
 
     if (!apiKey) {
       throw `Missing Api Key configuration for ${this.name} provider`;
     }
 
     const openai = createOpenAI({
-      baseURL: 'https://api.hyperbolic.xyz/v1/',
+      baseURL: baseUrl || 'https://api.hyperbolic.xyz/v1/',
       apiKey,
     });
 

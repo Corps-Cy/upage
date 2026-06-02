@@ -1,6 +1,6 @@
 # UPage - 1Panel 应用商店
 
-基于大模型的可视化网页构建平台，支持智谱 Coding Plan。
+基于大模型的可视化网页构建平台。
 
 ## 安装方式一：本地应用（推荐）
 
@@ -23,28 +23,28 @@
 3. 分支：`main`，目录：`1panel-appstore`
 4. 保存后在应用列表中找到 UPage，点击安装
 
-## 智谱 Coding Plan 配置
-
-1. 访问 [智谱开放平台](https://open.bigmodel.cn) 购买 Coding Plan 套餐
-2. 获取 API Key
-3. 安装时选择 **智谱 Coding Plan** 提供商，填入 API Key
-4. 默认模型推荐 `glm-5.1`，辅助模型推荐 `glm-4.5-air`
-
 ## 环境变量
 
 | 变量 | 说明 | 必填 | 默认值 |
 |------|------|------|--------|
 | `PANEL_APP_PORT_HTTP` | HTTP 端口 | 是 | `3000` |
-| `LLM_PROVIDER` | LLM 提供商 | 是 | `ZhiPuCodingPlan` |
+| `LLM_PROVIDER` | LLM 提供商 | 是 | `OpenAI` |
 | `PROVIDER_API_KEY` | API 密钥 | 是 | - |
-| `PROVIDER_BASE_URL` | API 地址（仅 OpenAI/Ollama/LMStudio） | 否 | - |
-| `LLM_DEFAULT_MODEL` | 默认模型 | 是 | `glm-5.1` |
-| `LLM_MINOR_MODEL` | 辅助模型 | 否 | `glm-4.5-air` |
+| `PROVIDER_BASE_URL` | API 地址（部分提供商需要） | 否 | - |
+| `LLM_DEFAULT_MODEL` | 默认模型 | 是 | - |
+| `LLM_MINOR_MODEL` | 辅助模型 | 是 | - |
+| `LLM_VISION_PROVIDER` | 视觉模型提供商 | 否 | - |
+| `LLM_VISION_MODEL` | 视觉模型 | 否 | - |
+| `VISION_PROVIDER_BASE_URL` | 视觉 API 地址 | 否 | - |
+| `VISION_PROVIDER_API_KEY` | 视觉 API 密钥 | 否 | - |
+| `SERPER_API_KEY` | Serper 搜索 API 密钥 | 否 | - |
+| `WEATHER_API_KEY` | 天气 API 密钥 | 否 | - |
+| `MAX_UPLOAD_SIZE_MB` | 最大上传大小 (MB) | 否 | `5` |
 
 ## 数据持久化
 
 | 路径 | 说明 |
 |------|------|
-| `./data/data` | SQLite 数据库 |
-| `./data/logs` | 应用日志 |
-| `./data/storage` | 用户上传文件 |
+| `./data` | SQLite 数据库 |
+| `./logs` | 应用日志 |
+| `./storage` | 用户上传文件 |

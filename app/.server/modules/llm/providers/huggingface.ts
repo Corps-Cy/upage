@@ -80,14 +80,14 @@ export default class HuggingFaceProvider extends BaseProvider {
   getModelInstance(options: { model: string; providerSettings?: Record<string, IProviderSetting> }): LanguageModel {
     const { model, providerSettings } = options;
 
-    const { apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
+    const { baseUrl, apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
 
     if (!apiKey) {
       throw new Error(`Missing API key for ${this.name} provider`);
     }
 
     const openai = createOpenAI({
-      baseURL: 'https://api-inference.huggingface.co/v1/',
+      baseURL: baseUrl || 'https://api-inference.huggingface.co/v1/',
       apiKey,
     });
 

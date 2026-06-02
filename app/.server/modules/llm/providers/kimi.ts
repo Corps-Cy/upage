@@ -63,7 +63,7 @@ export default class KimiProvider extends BaseProvider {
   getModelInstance(options: { model: string; providerSettings?: Record<string, IProviderSetting> }): LanguageModel {
     const { model, providerSettings } = options;
 
-    const { apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
+    const { baseUrl, apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
 
     if (!apiKey) {
       throw `Missing Api Key configuration for ${this.name} provider`;
@@ -71,7 +71,7 @@ export default class KimiProvider extends BaseProvider {
 
     const provider = createOpenAICompatible({
       name: this.name,
-      baseURL: 'https://api.moonshot.cn/v1',
+      baseURL: baseUrl || 'https://api.moonshot.cn/v1',
       apiKey,
       includeUsage: true,
       transformRequestBody: (body) => {

@@ -69,9 +69,12 @@ export default class OpenRouterProvider extends BaseProvider {
     { name: 'cohere/command', label: 'Cohere Command (OpenRouter)', provider: 'OpenRouter', maxTokenAllowed: 4096 },
   ];
 
-  async getDynamicModels(_settings?: IProviderSetting, _serverEnv: Record<string, string> = {}): Promise<ModelInfo[]> {
+  async getDynamicModels(settings?: IProviderSetting, _serverEnv: Record<string, string> = {}): Promise<ModelInfo[]> {
+    const { baseUrl: fetchBaseUrl } = this.getProviderBaseUrlAndKey(settings);
+    const baseUrl = fetchBaseUrl || 'https://openrouter.ai/api/v1';
+
     try {
-      const response = await fetch('https://openrouter.ai/api/v1/models', {
+      const response = await fetch(`${baseUrl}/models`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -96,13 +99,14 @@ export default class OpenRouterProvider extends BaseProvider {
   getModelInstance(options: { model: string; providerSettings?: Record<string, IProviderSetting> }): LanguageModel {
     const { model, providerSettings } = options;
 
-    const { apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
+    const { baseUrl, apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
 
     if (!apiKey) {
       throw new Error(`Missing API key for ${this.name} provider`);
     }
 
     const openRouter = createOpenRouter({
+      baseURL: baseUrl,
       apiKey,
     });
 

@@ -22,14 +22,14 @@ export default class GithubProvider extends BaseProvider {
   getModelInstance(options: { model: string; providerSettings?: Record<string, IProviderSetting> }): LanguageModel {
     const { model, providerSettings } = options;
 
-    const { apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
+    const { baseUrl, apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
 
     if (!apiKey) {
       throw new Error(`Missing API key for ${this.name} provider`);
     }
 
     const openai = createOpenAI({
-      baseURL: 'https://models.inference.ai.azure.com',
+      baseURL: baseUrl || 'https://models.inference.ai.azure.com',
       apiKey,
     });
 

@@ -24,13 +24,14 @@ export default class GroqProvider extends BaseProvider {
   ];
 
   async getDynamicModels(settings?: IProviderSetting): Promise<ModelInfo[]> {
-    const { apiKey } = this.getProviderBaseUrlAndKey(settings);
+    const { baseUrl: fetchBaseUrl, apiKey } = this.getProviderBaseUrlAndKey(settings);
+    const baseUrl = fetchBaseUrl || 'https://api.groq.com/openai/v1';
 
     if (!apiKey) {
       throw `Missing Api Key configuration for ${this.name} provider`;
     }
 
-    const response = await fetch(`https://api.groq.com/openai/v1/models`, {
+    const response = await fetch(`${baseUrl}/models`, {
       headers: {
         Authorization: `Bearer ${apiKey}`,
       },
@@ -53,14 +54,14 @@ export default class GroqProvider extends BaseProvider {
   getModelInstance(options: { model: string; providerSettings?: Record<string, IProviderSetting> }): LanguageModel {
     const { model, providerSettings } = options;
 
-    const { apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
+    const { baseUrl, apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
 
     if (!apiKey) {
       throw new Error(`Missing API key for ${this.name} provider`);
     }
 
     const openai = createOpenAI({
-      baseURL: 'https://api.groq.com/openai/v1',
+      baseURL: baseUrl || 'https://api.groq.com/openai/v1',
       apiKey,
     });
 

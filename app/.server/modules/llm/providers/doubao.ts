@@ -39,7 +39,7 @@ export default class DouBaoProvider extends BaseProvider {
   getModelInstance(options: { model: string; providerSettings?: Record<string, IProviderSetting> }): LanguageModel {
     const { model, providerSettings } = options;
 
-    const { apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
+    const { baseUrl, apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
 
     if (!apiKey) {
       throw `Missing Api Key configuration for ${this.name} provider`;
@@ -47,7 +47,7 @@ export default class DouBaoProvider extends BaseProvider {
 
     const provider = createOpenAICompatible({
       name: this.name,
-      baseURL: 'https://ark.cn-beijing.volces.com/api/v3',
+      baseURL: baseUrl || 'https://ark.cn-beijing.volces.com/api/v3',
       apiKey,
       includeUsage: true,
     });

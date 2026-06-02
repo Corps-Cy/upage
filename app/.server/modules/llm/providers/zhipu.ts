@@ -39,7 +39,7 @@ export default class ZhiPuProvider extends BaseProvider {
   getModelInstance(options: { model: string; providerSettings?: Record<string, IProviderSetting> }): LanguageModel {
     const { model, providerSettings } = options;
 
-    const { apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
+    const { baseUrl, apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
 
     if (!apiKey) {
       throw `Missing Api Key configuration for ${this.name} provider`;
@@ -47,7 +47,7 @@ export default class ZhiPuProvider extends BaseProvider {
 
     const openai = createOpenAICompatible({
       name: this.name,
-      baseURL: 'https://open.bigmodel.cn/api/paas/v4',
+      baseURL: baseUrl || 'https://open.bigmodel.cn/api/paas/v4',
       apiKey,
       includeUsage: true,
     });

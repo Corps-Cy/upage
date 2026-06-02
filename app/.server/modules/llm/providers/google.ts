@@ -27,13 +27,14 @@ export default class GoogleProvider extends BaseProvider {
   ];
 
   async getDynamicModels(settings?: IProviderSetting): Promise<ModelInfo[]> {
-    const { apiKey } = this.getProviderBaseUrlAndKey(settings);
+    const { baseUrl: fetchBaseUrl, apiKey } = this.getProviderBaseUrlAndKey(settings);
+    const baseUrl = fetchBaseUrl || 'https://generativelanguage.googleapis.com/v1beta';
 
     if (!apiKey) {
       throw `Missing Api Key configuration for ${this.name} provider`;
     }
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`, {
+    const response = await fetch(`${baseUrl}/models?key=${apiKey}`, {
       headers: {
         // biome-ignore lint: ignore Content-Type header
         ['Content-Type']: 'application/json',
@@ -55,13 +56,14 @@ export default class GoogleProvider extends BaseProvider {
   getModelInstance(options: { model: string; providerSettings?: Record<string, IProviderSetting> }): LanguageModel {
     const { model, providerSettings } = options;
 
-    const { apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
+    const { baseUrl, apiKey } = this.getProviderBaseUrlAndKey(providerSettings?.[this.name]);
 
     if (!apiKey) {
       throw new Error(`Missing API key for ${this.name} provider`);
     }
 
     const google = createGoogleGenerativeAI({
+      baseURL: baseUrl,
       apiKey,
     });
 

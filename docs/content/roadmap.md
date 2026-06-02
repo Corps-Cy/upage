@@ -70,6 +70,5 @@ title: 功能规划
 
 | 功能 | 版本 | 说明 |
 |------|------|------|
-| 智谱 Coding Plan 支持 | v2.0.0 | 支持 glm-5.1/4.7/5-turbo/4.5-air，使用 Coding Plan 专用端点 |
 | 1Panel 应用商店支持 | v2.0.0 | 支持通过 1Panel 本地应用方式一键安装部署 |
 | GHCR 镜像发布 | v2.0.0 | GitHub Actions 自动构建多平台 Docker 镜像并推送到 GHCR |
