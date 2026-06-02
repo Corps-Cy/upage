@@ -7,7 +7,9 @@
 1. 将 `upage` 目录上传到 1Panel 服务器的 `/opt/1panel/resource/apps/local/` 目录下
    ```bash
    cd /opt/1panel/resource/apps/local/
-   git clone https://github.com/Corps-Cy/upage.git /tmp/upage-repo
+   rm -rf /tmp/upage-repo
+   git clone https://github.com/Corps-Cy/upage.git /tmp/upage-repo --depth 1
+   rm -rf ./upage
    cp -r /tmp/upage-repo/1panel-appstore/upage ./upage
    rm -rf /tmp/upage-repo
    ```
