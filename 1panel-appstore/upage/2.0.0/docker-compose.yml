@@ -24,6 +24,7 @@ services:
       VISION_PROVIDER_API_KEY: ${VISION_PROVIDER_API_KEY}
       SERPER_API_KEY: ${SERPER_API_KEY}
       WEATHER_API_KEY: ${WEATHER_API_KEY}
+      STORAGE_DIR: /app/storage
       MAX_UPLOAD_SIZE_MB: ${MAX_UPLOAD_SIZE_MB:-5}
     volumes:
       - ./data:/app/data
